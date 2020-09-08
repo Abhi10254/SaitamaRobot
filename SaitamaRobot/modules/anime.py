@@ -277,12 +277,10 @@ def character(update: Update, context: CallbackContext):
         if image:
             image = image.get('large')
             update.effective_message.reply_photo(
-                photo=image,
-                caption=msg.replace('<b>', '</b>'),
-                parse_mode=ParseMode.MARKDOWN)
+                photo=image, caption=msg, parse_mode=ParseMode.MARKDOWN)
         else:
             update.effective_message.reply_text(
-                msg.replace('<b>', '</b>'), parse_mode=ParseMode.MARKDOWN)
+                msg, parse_mode=ParseMode.MARKDOWN)
 
 
 @run_async
@@ -506,7 +504,7 @@ def site_search(update: Update, context: CallbackContext, site: str):
         if search_result:
             result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKaizoku</code>: \n"
             for entry in search_result:
-                post_link = "https://animekaizoku.com/" + entry.a['href']
+                post_link = entry.a['href']
                 post_name = html.escape(entry.text)
                 result += f"• <a href='{post_link}'>{post_name}</a>\n"
         else:
